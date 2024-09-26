@@ -34,9 +34,8 @@ async def process_start_command_user(message: Message, state: FSMContext) -> Non
     await state.update_data(state=None)
     await rq.add_user(tg_id=message.chat.id,
                       data={"tg_id": message.chat.id, "username": message.from_user.username})
-    await message.answer(text=f'Приветственное сообщение. Описание того для чего нужен этот бот. Как им пользоваться')
-    await message.answer(text=f'Для участи я в розыгрыше пришлите скриншот "присейва". Требования к скриншоту.\n\n'
-                              f'В подписи к скриншоту укажите адрес вашей электронной почты')
+    await message.answer(text=f'Привет! Чтобы принять участие в конкурсе, пришли в этого бота скриншот своего'
+                              f' пресейва и ссылку на почту, к которой привязан твой аккаунт на Яндекс.Музыке.')
     await state.set_state(User.screenshot)
 
 
@@ -51,7 +50,8 @@ async def get_screenshot(message: Message, bot: Bot) -> None:
     logging.info(f'get_screenshot: {message.chat.id}')
     screenshot = message.photo[-1].file_id
     email = message.caption
-    await message.answer(text=f'Данные отправлены на модерацию. Ожидайте...')
+    await message.answer(text=f'Спасибо! Данные отправлены на проверку. В течение нескольких минут модератор'
+                              f' проверит скриншот и подтвердит участие.')
     await rq.update_user(tg_id=message.chat.id,
                          screenshot=screenshot,
                          email=email)

@@ -91,7 +91,9 @@ async def confirm_screenshot(callback: CallbackQuery, bot: Bot):
                                       reply_markup=None)
         info_user: User = await rq.get_info_user(tg_id=tg_id)
         await bot.send_message(chat_id=tg_id,
-                               text=f'Данные приняты. Ваш номер для участия в конкурсе {info_user.moderation}')
+                               text=f'Заявка принята! Твой порядковый номер: {info_user.moderation}\n\n'
+                                    f'Итоги конкурса мы подведем 23.11., в день выхода альбома.'
+                                    f' Следи за информацией в социальных сетях!')
     else:
         await bot.delete_message(chat_id=callback.message.chat.id,
                                  message_id=callback.message.message_id)
