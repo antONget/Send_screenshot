@@ -100,5 +100,7 @@ async def confirm_screenshot(callback: CallbackQuery, bot: Bot):
         await callback.message.answer(text='Данные пользователя отклонены',
                                       reply_markup=None)
         await bot.send_message(chat_id=tg_id,
-                               text=f'Данные отклонены. Здесь нужно повторить требования к скриншоту.')
+                               text=f'Заявка отклонена. Проверьте свой скриншот. Если с ним все в порядке, напишите,'
+                                    f' пожалуйста, в аккаунт @brilliantsound812,'
+                                    f' мы рассмотрим вашу заявку в ручном режиме.')
     await callback.answer()
